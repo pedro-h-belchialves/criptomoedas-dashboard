@@ -1,0 +1,32 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #f4f7f9;
+  color: #333;
+  line-height: 1.6;
+  padding: 20px;
+  margin: 0;
+}
+
+/* Estilo global para links */
+a {
+  text-decoration: none;
+  color: #42a5f5;
+}
+
+a:hover {
+  color: #1e88e5;
+}
+
+/* Container centralizado */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}

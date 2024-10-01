@@ -1,0 +1,17 @@
+.container {
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin: 10px 0;
+  font-size: 1.2rem;
+}
+
+h1 {
+  color: #42a5f5;
+}

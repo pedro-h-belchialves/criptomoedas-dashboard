@@ -1,0 +1,52 @@
+.crypto-details {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.details-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.details-header img {
+  width: 80px;
+  height: 80px;
+}
+
+.details-header h1 {
+  font-size: 2rem;
+}
+
+.details-info p {
+  font-size: 1.2rem;
+  margin: 10px 0;
+}
+
+/* Estilos para os botões de navegação */
+.crypto-buttons,
+.details-buttons {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.details-button,
+.charts-button {
+  background-color: #42a5f5;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.details-button:hover,
+.charts-button:hover {
+  background-color: #1e88e5;
+  color: #fff;
+}
