@@ -34,7 +34,7 @@ const Home = () => {
             </p>
             <div className="crypto-buttons">
               <Link to={`/details/${crypto.id}`} className="details-button">
-                Ver Detalhes
+                {crypto.id}
               </Link>
               <Link to={`/charts/${crypto.id}`} className="charts-button">
                 Ver Gráficos

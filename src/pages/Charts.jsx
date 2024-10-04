@@ -1,36 +1,63 @@
 import { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { getCryptoList } from "../api";
 
+// registra os componentes no Chart.js
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
+//pagina de graficos
 const Charts = () => {
+  //STATES
   const { id } = useParams();
   const [datasets, setDatasets] = useState([]);
+  const [lable, setLable] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  //Requisição dos dados
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await fetch(
-          `https://api.coingecko.com/api/v3/coins/${id}`
-        );
-        const data = await response.json();
+        const fetchCryptos = async () => {
+          const datasets = await getCryptoList();
+          setLable(datasets.find((data) => data.id === id).name);
 
-        if (data.market_data && data.market_data.current_price) {
-          const processedDatasets = [
-            {
+          const processedDatasets = datasets.map((data) => {
+            return {
               label: data.name,
-              data: [data.market_data.current_price.usd],
-              backgroundColor: "rgba(75, 192, 192, 0.2)",
-              borderColor: "rgba(75, 192, 192, 1)",
+              data: [data.current_price],
+              backgroundColor:
+                id === data.id
+                  ? "rgba(75, 192, 192, 0.2)"
+                  : "rgba(000, 000, 000, 0.2)",
+              borderColor:
+                id === data.id
+                  ? "rgba(75, 192, 192, 1)"
+                  : "rgba(000, 000, 000, 0.5)",
               borderWidth: 1,
-            },
-          ];
+            };
+          });
 
           setDatasets(processedDatasets);
-        } else {
-          console.error("Dados de preço não disponíveis.");
-        }
+        };
+        fetchCryptos();
       } catch (error) {
         console.error("Erro ao buscar dados:", error);
       } finally {
@@ -49,7 +76,7 @@ const Charts = () => {
       },
       title: {
         display: true,
-        text: "Título do Gráfico",
+        text: `Preço Atual de ${datasets[0]?.label}`,
       },
     },
   };
@@ -60,8 +87,16 @@ const Charts = () => {
 
   return (
     <div>
-      {datasets.length > 0 ? (
-        <Bar data={{ datasets }} options={options} />
+      <Link to="/">Voltar</Link>
+      <h1>{lable}</h1>
+      {datasets ? (
+        <Bar
+          data={{
+            labels: ["Preço Atual"], // Label para o preço atual
+            datasets: datasets, // Dataset dinâmico carregado da API
+          }}
+          options={options}
+        />
       ) : (
         <p>Nenhum dado disponível para exibir.</p>
       )}
