@@ -27,7 +27,7 @@ const Charts = () => {
   //STATES
   const { id } = useParams();
   const [datasets, setDatasets] = useState([]);
-  const [lable, setLable] = useState([]);
+  const [lable, setLable] = useState("");
   const [loading, setLoading] = useState(true);
 
   //Requisição dos dados
